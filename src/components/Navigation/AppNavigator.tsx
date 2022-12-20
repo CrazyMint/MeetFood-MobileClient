@@ -5,6 +5,9 @@ import {
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { AppRouteName } from '../../constants/navigation';
 import { Upload } from '../../screens/Upload';
+import { Signup } from '../../screens/Signup';
+import { Login } from '../../screens/Login';
+import { ConfirmSignupCode } from '../../screens/ConfirmSignupCode';
 import React from 'react';
 import {
 	AppHomeNavigator,
@@ -14,6 +17,12 @@ import {
 export type AppNavigatorParamList = {
 	[AppRouteName.HomeNavigator]: NavigatorScreenParams<AppHomeNavigatorParamList>;
 	[AppRouteName.UploadScreen]: undefined;
+	[AppRouteName.SignupScreen]: undefined;
+	[AppRouteName.ConfirmSignupCodeScreen]: {
+		email: string;
+		password: string;
+	};
+	[AppRouteName.LoginScreen]: undefined;
 };
 
 const { Navigator, Screen } = createStackNavigator<AppNavigatorParamList>();
@@ -32,6 +41,12 @@ export const AppNavigator: React.FC = () => {
 				component={Upload}
 				options={TransitionPresets.ModalSlideFromBottomIOS}
 			/>
+			<Screen name={AppRouteName.SignupScreen} component={Signup} />
+			<Screen
+				name={AppRouteName.ConfirmSignupCodeScreen}
+				component={ConfirmSignupCode}
+			/>
+			<Screen name={AppRouteName.LoginScreen} component={Login} />
 		</Navigator>
 	);
 };
