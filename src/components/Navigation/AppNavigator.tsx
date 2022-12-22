@@ -5,6 +5,10 @@ import {
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { AppRouteName } from '../../constants/navigation';
 import { Upload } from '../../screens/Upload';
+import { Signup } from '../../screens/Signup';
+import { Login } from '../../screens/Login';
+import { ConfirmSignupCode } from '../../screens/ConfirmSignupCode';
+import { ResetPassword } from '../../screens/ResetPassword';
 import React from 'react';
 import {
 	AppHomeNavigator,
@@ -14,6 +18,13 @@ import {
 export type AppNavigatorParamList = {
 	[AppRouteName.HomeNavigator]: NavigatorScreenParams<AppHomeNavigatorParamList>;
 	[AppRouteName.UploadScreen]: undefined;
+	[AppRouteName.SignupScreen]: undefined;
+	[AppRouteName.ConfirmSignupCodeScreen]: {
+		email: string;
+		password: string;
+	};
+	[AppRouteName.LoginScreen]: undefined;
+	[AppRouteName.ResetPasswordScreen]: undefined;
 };
 
 const { Navigator, Screen } = createStackNavigator<AppNavigatorParamList>();
@@ -31,6 +42,16 @@ export const AppNavigator: React.FC = () => {
 				name={AppRouteName.UploadScreen}
 				component={Upload}
 				options={TransitionPresets.ModalSlideFromBottomIOS}
+			/>
+			<Screen name={AppRouteName.SignupScreen} component={Signup} />
+			<Screen
+				name={AppRouteName.ConfirmSignupCodeScreen}
+				component={ConfirmSignupCode}
+			/>
+			<Screen name={AppRouteName.LoginScreen} component={Login} />
+			<Screen
+				name={AppRouteName.ResetPasswordScreen}
+				component={ResetPassword}
 			/>
 		</Navigator>
 	);

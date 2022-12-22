@@ -2,27 +2,17 @@ import React from 'react';
 import { Text } from 'react-native';
 import { Placeholder } from '../../components/Placeholder';
 import { Button } from '@ui-kitten/components';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { AppNavigatorParamList } from '../../components/Navigation/AppNavigator';
-import { AppHomeRouteName, AppRouteName } from '../../constants/navigation';
+import { useNavigation } from '../../hooks/useNavigation';
 
 export interface UploadProps {}
 
 export const Upload: React.FC<UploadProps> = () => {
-	const { navigate } =
-		useNavigation<StackNavigationProp<AppNavigatorParamList>>();
+	const { navigateToFeedScreen } = useNavigation();
 
 	return (
 		<Placeholder>
 			<Text>This is Upload Screen</Text>
-			<Button
-				onPress={() => {
-					navigate(AppRouteName.HomeNavigator, {
-						screen: AppHomeRouteName.FeedScreen,
-					});
-				}}
-			>
+			<Button onPress={navigateToFeedScreen}>
 				<Text>Go Back</Text>
 			</Button>
 		</Placeholder>
