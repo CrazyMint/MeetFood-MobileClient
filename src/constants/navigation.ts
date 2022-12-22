@@ -4,6 +4,7 @@ export enum AppRouteName {
 	SignupScreen = 'SignupScreen',
 	ConfirmSignupCodeScreen = 'ConfirmSignupCode',
 	LoginScreen = 'LoginScreen',
+	ResetPasswordScreen = 'ResetPasswordScreen',
 }
 
 export enum AppHomeRouteName {

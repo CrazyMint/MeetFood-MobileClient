@@ -1,110 +1,117 @@
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-	BackIcon,
-	Button,
-	Input,
-	SecureInput,
-	Text,
-} from '../../components/Common';
+import { Button, Input, SecureInput, Text } from '../../components/Common';
 import { useForm } from '../../hooks/useForm';
-import { resendConfirmationCode, userSignin } from '../../utils/auth';
-import { useNavigation } from '@react-navigation/native';
-import { AppHomeRouteName, AppRouteName } from '../../constants/navigation';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { AppNavigatorParamList } from '../../components/Navigation/AppNavigator';
+import { resendConfirmationCode } from '../../utils/auth';
 import { isUerNotConfirmedError } from '../../utils/error';
+import { useNavigation } from '../../hooks/useNavigation';
+import { useUserContext } from '../../contexts/UserContext';
+import { AuthLayout } from '../../components/Layout';
 
 export const Login: React.FC = () => {
-	const { goBack, navigate } =
-		useNavigation<StackNavigationProp<AppNavigatorParamList>>();
+	const {
+		navigateToFeedScreen,
+		navigateToConfirmScreen,
+		navigateToSignupScreen,
+		navigateToResetPasswordScreen,
+	} = useNavigation();
+
+	const { login } = useUserContext();
 
 	const {
 		values: { email, password },
 		onFormValueChange,
-	} = useForm({
-		email: '',
-		password: '',
-	});
+		errors,
+		setFormErrors,
+		handleSubmit,
+	} = useForm(
+		{
+			email: '',
+			password: '',
+		},
+		{
+			email: 'required',
+			password: 'required',
+		},
+	);
 
 	const onLogin = useCallback(async () => {
 		try {
-			await userSignin(email, password);
-			navigate(AppRouteName.HomeNavigator, {
-				screen: AppHomeRouteName.FeedScreen,
-			});
+			// await userSignin(email, password);
+			await login(email, password);
+			navigateToFeedScreen();
 		} catch (error: any) {
 			if (isUerNotConfirmedError(error)) {
 				await resendConfirmationCode(email).catch();
-				navigate(AppRouteName.ConfirmSignupCodeScreen, { email, password });
+				navigateToConfirmScreen(email, password);
 			}
-
-			console.error(error?.message);
+			// console.error(error?.message);
+			setFormErrors(error?.message);
 		}
-	}, [email, navigate, password]);
+	}, [
+		email,
+		login,
+		navigateToConfirmScreen,
+		navigateToFeedScreen,
+		password,
+		setFormErrors,
+	]);
 
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
+		<AuthLayout>
+			<Text
+				category="h5"
+				text="Log In"
+				style={{ alignSelf: 'center', marginTop: 16, marginBottom: 24 }}
+			/>
+
+			<Input
+				label="Email"
+				value={email}
+				onChangeText={onFormValueChange('email')}
+				keyboardType="email-address"
+				style={{
+					marginBottom: 24,
+				}}
+				errorMessage={errors?.email}
+			/>
+
+			<SecureInput
+				label="Password"
+				value={password}
+				onChangeText={onFormValueChange('password')}
+				keyboardType="default"
+				style={{
+					marginBottom: 24,
+				}}
+				errorMessage={errors?.password}
+			/>
+
+			<Text
+				text="Forgot your password?"
+				style={{ alignSelf: 'center', marginBottom: 24 }}
+				onPress={navigateToResetPasswordScreen}
+			/>
+
+			<Button
+				text="Log In"
+				variant="primary"
+				onPress={handleSubmit(onLogin)}
+				style={{ marginBottom: 24 }}
+			/>
+
 			<View
 				style={{
-					height: 44,
-					padding: 10,
+					flexDirection: 'row',
+					alignItems: 'center',
+					justifyContent: 'center',
 				}}
 			>
-				<BackIcon size={25} color="#0F0E0E" onPress={goBack} />
+				<Text text="Don't have an account?" style={{ marginRight: 4 }} />
+				<Text text="Sign up here" onPress={navigateToSignupScreen} />
+				<Text text="." />
 			</View>
-
-			<View style={{ flex: 1, paddingHorizontal: 16 }}>
-				<Text
-					category="h5"
-					text="Log In"
-					style={{ alignSelf: 'center', marginTop: 16, marginBottom: 24 }}
-				/>
-
-				<Input
-					label="Email"
-					value={email}
-					onChangeText={onFormValueChange('email')}
-					keyboardType="email-address"
-					style={{
-						marginBottom: 24,
-					}}
-				/>
-
-				<SecureInput
-					label="Password"
-					value={password}
-					onChangeText={onFormValueChange('password')}
-					keyboardType="default"
-					style={{
-						marginBottom: 24,
-					}}
-				/>
-
-				<Button
-					text="Log In"
-					variant="primary"
-					onPress={onLogin}
-					style={{ marginBottom: 24 }}
-				/>
-
-				<View
-					style={{
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-				>
-					<Text text="Don't have an account?" style={{ marginRight: 4 }} />
-					<Text
-						text="Sign up here"
-						onPress={() => navigate(AppRouteName.SignupScreen)}
-					/>
-					<Text text="." />
-				</View>
-			</View>
-		</SafeAreaView>
+		</AuthLayout>
 	);
 };
 

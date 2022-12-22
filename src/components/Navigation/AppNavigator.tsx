@@ -8,6 +8,7 @@ import { Upload } from '../../screens/Upload';
 import { Signup } from '../../screens/Signup';
 import { Login } from '../../screens/Login';
 import { ConfirmSignupCode } from '../../screens/ConfirmSignupCode';
+import { ResetPassword } from '../../screens/ResetPassword';
 import React from 'react';
 import {
 	AppHomeNavigator,
@@ -23,6 +24,7 @@ export type AppNavigatorParamList = {
 		password: string;
 	};
 	[AppRouteName.LoginScreen]: undefined;
+	[AppRouteName.ResetPasswordScreen]: undefined;
 };
 
 const { Navigator, Screen } = createStackNavigator<AppNavigatorParamList>();
@@ -47,6 +49,10 @@ export const AppNavigator: React.FC = () => {
 				component={ConfirmSignupCode}
 			/>
 			<Screen name={AppRouteName.LoginScreen} component={Login} />
+			<Screen
+				name={AppRouteName.ResetPasswordScreen}
+				component={ResetPassword}
+			/>
 		</Navigator>
 	);
 };
