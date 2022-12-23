@@ -1,1 +1,2 @@
-export * from './AuthLayout';
+export { AuthLayout } from './AuthLayout';
+export { Grid } from './Grid';

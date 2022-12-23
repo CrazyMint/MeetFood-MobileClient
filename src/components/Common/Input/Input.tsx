@@ -4,12 +4,11 @@ import {
 	InputProps as UiKittenInputProps,
 } from '@ui-kitten/components';
 import { styles } from './styles';
-import { TextStyle, View } from 'react-native';
+import { View } from 'react-native';
 import Text from '../Text';
 import { CloseIcon } from '../Icon';
 
 export interface InputProps extends UiKittenInputProps {
-	style?: TextStyle;
 	enableCloseIcon?: boolean;
 	errorMessage?: string | null;
 }

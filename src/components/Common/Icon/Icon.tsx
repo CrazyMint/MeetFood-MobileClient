@@ -42,3 +42,4 @@ export const CloseIcon = IconGetter('close-outline');
 export const EyeIcon = IconGetter('eye-outline');
 export const EyeOffIcon = IconGetter('eye-off-outline');
 export const BackIcon = IconGetter('arrow-ios-back-outline');
+export const MenuIcon = IconGetter('menu-outline');
