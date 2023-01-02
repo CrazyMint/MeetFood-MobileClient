@@ -33,6 +33,12 @@
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 			</dict>
+			<key>meetfoodaustin-env.eba-m7kud6rj.us-east-2.elasticbeanstalk.com</key>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			<dict>
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>

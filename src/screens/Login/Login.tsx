@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Button, Input, SecureInput, Text } from '../../components/Common';
 import { useForm } from '../../hooks/useForm';
 import { resendConfirmationCode } from '../../utils/auth';
-import { isUerNotConfirmedError } from '../../utils/error';
+import { isUserNotConfirmedError } from '../../utils/error';
 import { useNavigation } from '../../hooks/useNavigation';
 import { useUserContext } from '../../contexts/UserContext';
 import { AuthLayout } from '../../components/Layout';
@@ -41,7 +41,7 @@ export const Login: React.FC = () => {
 			await login(email, password);
 			navigateToFeedScreen();
 		} catch (error: any) {
-			if (isUerNotConfirmedError(error)) {
+			if (isUserNotConfirmedError(error)) {
 				await resendConfirmationCode(email).catch();
 				navigateToConfirmScreen(email, password);
 			}
