@@ -13,6 +13,7 @@ import { useUserContext } from '../../contexts/UserContext';
 import { AuthLayout } from '../../components/Layout';
 import { View } from 'react-native';
 import { useTimer } from '../../hooks/useTimer';
+import { isNoUserRecordInDBError } from '../../utils/error';
 
 export interface ConfirmSignupCodeProps
 	extends NativeStackScreenProps<
@@ -28,7 +29,11 @@ export const ConfirmSignupCode: React.FC<ConfirmSignupCodeProps> = ({
 		values: { code },
 		onFormValueChange,
 	} = useForm({ code: '' }, { code: 'required' });
-	const { navigateToFeedScreen, navigateToLoginScreen } = useNavigation();
+	const {
+		navigateToFeedScreen,
+		navigateToLoginScreen,
+		navigateToAccountProfileSetupScreen,
+	} = useNavigation();
 
 	const { login } = useUserContext();
 
@@ -58,6 +63,10 @@ export const ConfirmSignupCode: React.FC<ConfirmSignupCodeProps> = ({
 				navigateToFeedScreen();
 			} catch (error) {
 				// TODO: show error message
+				if (isNoUserRecordInDBError(error)) {
+					navigateToAccountProfileSetupScreen(email);
+					return;
+				}
 				navigateToLoginScreen();
 			}
 		} catch (error: any) {
@@ -67,6 +76,7 @@ export const ConfirmSignupCode: React.FC<ConfirmSignupCodeProps> = ({
 		code,
 		email,
 		login,
+		navigateToAccountProfileSetupScreen,
 		navigateToFeedScreen,
 		navigateToLoginScreen,
 		password,

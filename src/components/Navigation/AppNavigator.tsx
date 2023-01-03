@@ -9,11 +9,14 @@ import { Signup } from '../../screens/Signup';
 import { Login } from '../../screens/Login';
 import { ConfirmSignupCode } from '../../screens/ConfirmSignupCode';
 import { ResetPassword } from '../../screens/ResetPassword';
+import { AccountProfileSetup } from '../../screens/AccountProfileSetup';
 import React from 'react';
 import {
 	AppHomeNavigator,
 	AppHomeNavigatorParamList,
 } from './AppHomeNavigator';
+import UpdateAccountProfile from '../../screens/UpdateAccountProfile';
+import More from '../../screens/More';
 
 export type AppNavigatorParamList = {
 	[AppRouteName.HomeNavigator]: NavigatorScreenParams<AppHomeNavigatorParamList>;
@@ -25,6 +28,11 @@ export type AppNavigatorParamList = {
 	};
 	[AppRouteName.LoginScreen]: undefined;
 	[AppRouteName.ResetPasswordScreen]: undefined;
+	[AppRouteName.AccountProfileSetupScreen]: {
+		email: string;
+	};
+	[AppRouteName.UpdateAccountProfileScreen]: undefined;
+	[AppRouteName.MoreScreen]: undefined;
 };
 
 const { Navigator, Screen } = createStackNavigator<AppNavigatorParamList>();
@@ -48,11 +56,24 @@ export const AppNavigator: React.FC = () => {
 				name={AppRouteName.ConfirmSignupCodeScreen}
 				component={ConfirmSignupCode}
 			/>
-			<Screen name={AppRouteName.LoginScreen} component={Login} />
+			<Screen
+				name={AppRouteName.LoginScreen}
+				component={Login}
+				options={TransitionPresets.ModalSlideFromBottomIOS}
+			/>
 			<Screen
 				name={AppRouteName.ResetPasswordScreen}
 				component={ResetPassword}
 			/>
+			<Screen
+				name={AppRouteName.AccountProfileSetupScreen}
+				component={AccountProfileSetup}
+			/>
+			<Screen
+				name={AppRouteName.UpdateAccountProfileScreen}
+				component={UpdateAccountProfile}
+			/>
+			<Screen name={AppRouteName.MoreScreen} component={More} />
 		</Navigator>
 	);
 };

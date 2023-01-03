@@ -1,0 +1,22 @@
+{
+	"Functional component named by the file name with styles": {
+		"scope": "typescriptreact",
+		"prefix": "fc",
+		"body": [
+			"import React from 'react';",
+			"import { StyleSheet } from 'react-native';",
+			"",
+			"export const styles = StyleSheet.create({});",
+			"",
+			"export interface ${TM_FILENAME_BASE}Props {}",
+			"",
+			"export const ${TM_FILENAME_BASE}: React.FC<${TM_FILENAME_BASE}Props> = () => {",
+			"\treturn <></>;",
+			"};",
+			"",
+			"export default ${TM_FILENAME_BASE};",
+			""
+		],
+		"description": "Functional component named by the file name with styles"
+	}
+}
