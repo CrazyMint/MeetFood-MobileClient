@@ -3,7 +3,10 @@ import { View } from 'react-native';
 import { Button, Input, SecureInput, Text } from '../../components/Common';
 import { useForm } from '../../hooks/useForm';
 import { resendConfirmationCode } from '../../utils/auth';
-import { isUserNotConfirmedError } from '../../utils/error';
+import {
+	isUserNotConfirmedError,
+	isNoUserRecordInDBError,
+} from '../../utils/error';
 import { useNavigation } from '../../hooks/useNavigation';
 import { useUserContext } from '../../contexts/UserContext';
 import { AuthLayout } from '../../components/Layout';
@@ -14,6 +17,7 @@ export const Login: React.FC = () => {
 		navigateToConfirmScreen,
 		navigateToSignupScreen,
 		navigateToResetPasswordScreen,
+		navigateToAccountProfileSetupScreen,
 	} = useNavigation();
 
 	const { login } = useUserContext();
@@ -44,13 +48,17 @@ export const Login: React.FC = () => {
 			if (isUserNotConfirmedError(error)) {
 				await resendConfirmationCode(email).catch();
 				navigateToConfirmScreen(email, password);
+			} else if (isNoUserRecordInDBError(error)) {
+				navigateToAccountProfileSetupScreen(email);
 			}
+
 			// console.error(error?.message);
 			setFormErrors(error?.message);
 		}
 	}, [
 		email,
 		login,
+		navigateToAccountProfileSetupScreen,
 		navigateToConfirmScreen,
 		navigateToFeedScreen,
 		password,

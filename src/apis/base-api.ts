@@ -2,7 +2,7 @@ import { getAuthToken } from '../utils/auth';
 
 export const DEFAULT_REQUEST_SCHEMA = 'http://';
 export const DEFAULT_API_HOST =
-	'meetfoodaustin-env.eba-m7kud6rj.us-east-2.elasticbeanstalk.com';
+	'meetfoodaustin-env.eba-m7kud6rj.us-east-2.elasticbeanstalk.com/api/v1';
 
 const getString = (object: any) => {
 	return typeof object === 'object' ? JSON.stringify(object) : String(object);
@@ -56,6 +56,7 @@ export abstract class BaseAPI {
 
 		if (options.withAuthToken || options.withAuthToken === undefined) {
 			token = await getAuthToken();
+
 			options.headers = new Headers({
 				'cognito-token': token,
 				...options.headers,
@@ -101,26 +102,23 @@ export abstract class BaseAPI {
 			});
 	}
 
-	protected async get(path: string, options?: Omit<RequestOption, 'method'>) {
+	protected get(path: string, options?: Omit<RequestOption, 'method'>) {
 		return this.fetch(path, { ...options, method: 'GET' });
 	}
 
-	protected async put(path: string, options?: Omit<RequestOption, 'method'>) {
+	protected put(path: string, options?: Omit<RequestOption, 'method'>) {
 		return this.fetch(path, { ...options, method: 'PUT' });
 	}
 
-	protected async post(path: string, options?: Omit<RequestOption, 'method'>) {
+	protected post(path: string, options?: Omit<RequestOption, 'method'>) {
 		return this.fetch(path, { ...options, method: 'POST' });
 	}
 
-	protected async delete(
-		path: string,
-		options?: Omit<RequestOption, 'method'>,
-	) {
+	protected delete(path: string, options?: Omit<RequestOption, 'method'>) {
 		return this.fetch(path, { ...options, method: 'DELETE' });
 	}
 
-	protected async postForm(
+	protected postForm(
 		path: string,
 		form: FormData,
 		options?: Omit<RequestOption, 'method' | 'body'>,
@@ -135,7 +133,7 @@ export abstract class BaseAPI {
 		});
 	}
 
-	protected async postJson(
+	protected postJson(
 		path: string,
 		body: object,
 		options?: Omit<RequestOption, 'method' | 'body'>,

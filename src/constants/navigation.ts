@@ -5,6 +5,9 @@ export enum AppRouteName {
 	ConfirmSignupCodeScreen = 'ConfirmSignupCode',
 	LoginScreen = 'LoginScreen',
 	ResetPasswordScreen = 'ResetPasswordScreen',
+	AccountProfileSetupScreen = 'AccountProfileSetupScreen',
+	UpdateAccountProfileScreen = 'UpdateAccountProfileScreen',
+	MoreScreen = 'MoreScreen',
 }
 
 export enum AppHomeRouteName {

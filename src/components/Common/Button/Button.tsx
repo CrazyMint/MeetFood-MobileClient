@@ -1,9 +1,9 @@
+import React, { useState, useCallback } from 'react';
+import { TouchableOpacity, ViewStyle, TextStyle } from 'react-native';
 import { Spinner } from '@ui-kitten/components';
 import { EvaStatus } from '@ui-kitten/components/devsupport';
-import React, { useCallback, useState } from 'react';
-import { TextStyle, ViewStyle } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from '../Text';
+
 import { styles } from './styles';
 
 export interface ButtonProps {
@@ -30,12 +30,15 @@ export const Button: React.FC<ButtonProps> = ({
 	children,
 }) => {
 	const [internalIsLoading, setInternalIsLoading] = useState(false);
+
 	const internalOnPress = useCallback(async () => {
 		setInternalIsLoading(true);
 		await onPress?.();
 		setInternalIsLoading(false);
 	}, [onPress]);
+
 	const isLoading = loading === undefined ? internalIsLoading : loading;
+
 	return (
 		<TouchableOpacity
 			style={[

@@ -18,6 +18,7 @@ const BOTTOM_TAB_ROUTES: Array<string> = [
 
 const AUTENTICATED_ROUTES_SET = new Set([
 	AppRouteName.UploadScreen,
+	AppHomeRouteName.MeScreen,
 ] as Array<string>);
 
 export type BottomTabBarProps = Pick<
@@ -36,14 +37,14 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({
 	const { navigate } = navigation;
 	const { index: routeIndex, routeNames } = state;
 	const { bottom: SafeAreaBottom } = useSafeAreaInsets();
-	const { cognitoUser } = useUserContext();
+	const { cognitoUser, user } = useUserContext();
 
 	const onSelect = useCallback(
 		(index: number) => {
 			const currentTab = BOTTOM_TAB_ROUTES[index];
 
 			if (AUTENTICATED_ROUTES_SET.has(currentTab)) {
-				if (!cognitoUser) {
+				if (!cognitoUser || !user) {
 					navigate(AppRouteName.LoginScreen);
 					return;
 				}
@@ -51,7 +52,7 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({
 
 			navigate(currentTab);
 		},
-		[cognitoUser, navigate],
+		[cognitoUser, navigate, user],
 	);
 
 	return (

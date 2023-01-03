@@ -36,6 +36,23 @@ export const useNavigation = () => {
 		navigate(AppRouteName.ResetPasswordScreen);
 	}, [navigate]);
 
+	const navigateToAccountProfileSetupScreen = useCallback(
+		(email: string) => {
+			navigate(AppRouteName.AccountProfileSetupScreen, {
+				email,
+			});
+		},
+		[navigate],
+	);
+
+	const navigateToUpdateAccountProfileScreen = useCallback(() => {
+		navigate(AppRouteName.UpdateAccountProfileScreen);
+	}, [navigate]);
+
+	const navigateToMoreScreen = useCallback(() => {
+		navigate(AppRouteName.MoreScreen);
+	}, [navigate]);
+
 	return {
 		goBack,
 		navigate,
@@ -44,5 +61,8 @@ export const useNavigation = () => {
 		navigateToConfirmScreen,
 		navigateToSignupScreen,
 		navigateToResetPasswordScreen,
+		navigateToAccountProfileSetupScreen,
+		navigateToUpdateAccountProfileScreen,
+		navigateToMoreScreen,
 	};
 };

@@ -4,8 +4,7 @@ export const isUserNotConfirmedError = (error: any) =>
 export const isNoUserRecordInDBError = (error: any) => {
 	try {
 		return (
-			JSON.parse(error?.body || {})?.errors?.[0]?.msg ===
-			'Can not find the user.'
+			JSON.parse(error?.body || {})?.errors?.[0]?.msg === 'User not found.'
 		);
 	} catch (_) {
 		return false;

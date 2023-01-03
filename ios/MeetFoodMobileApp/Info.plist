@@ -34,11 +34,12 @@
 				<true/>
 			</dict>
 			<key>meetfoodaustin-env.eba-m7kud6rj.us-east-2.elasticbeanstalk.com</key>
+			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
-			<dict>
+			</dict>
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
