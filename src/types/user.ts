@@ -1,3 +1,5 @@
+import { VideoPost } from './video';
+
 export type User = {
 	_id: string;
 	userId: string;
@@ -5,4 +7,8 @@ export type User = {
 	userName: string;
 	firstName: string;
 	lastName: string;
+	videos: Array<{
+		_id: string;
+		videoPost: VideoPost;
+	}>;
 };

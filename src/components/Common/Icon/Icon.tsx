@@ -43,3 +43,7 @@ export const EyeIcon = IconGetter('eye-outline');
 export const EyeOffIcon = IconGetter('eye-off-outline');
 export const BackIcon = IconGetter('arrow-ios-back-outline');
 export const MenuIcon = IconGetter('menu-outline');
+export const NotLikeIcon = IconGetter('heart-outline');
+export const LikeIcon = IconGetter('heart');
+export const PlayIcon = IconGetter('arrow-right');
+export const RefreshIcon = IconGetter('refresh-outline');
