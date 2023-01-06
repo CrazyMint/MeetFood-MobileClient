@@ -3,8 +3,9 @@ import {
 	Input as UiKittenInput,
 	InputProps as UiKittenInputProps,
 } from '@ui-kitten/components';
-import { styles } from './styles';
 import { View } from 'react-native';
+
+import { styles } from './styles';
 import Text from '../Text';
 import { CloseIcon } from '../Icon';
 
@@ -60,7 +61,9 @@ export const Input: React.FC<InputProps> = ({
 							/>
 					  )
 					: () => (
-							<View>{typeof caption === 'function' ? caption() : caption}</View>
+							<View style={styles.caption}>
+								{typeof caption === 'function' ? caption() : caption}
+							</View>
 					  )
 			}
 			{...rest}

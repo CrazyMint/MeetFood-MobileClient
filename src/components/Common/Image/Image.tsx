@@ -1,15 +1,16 @@
-import { Spinner } from '@ui-kitten/components';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
-	ImageProps as RNImageProps,
-	Image as RNImage,
 	View,
+	Image as RNImage,
+	ImageProps as RNImageProps,
+	TouchableWithoutFeedback,
 } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { Spinner } from '@ui-kitten/components';
+
 import { styles } from './styles';
 import { Grid } from '../../Layout';
 
-export interface Size {
+interface Size {
 	width: number | undefined;
 	height: number | undefined;
 	ratio: number | undefined;
@@ -45,8 +46,10 @@ export const Image: React.FC<ImageProps> = ({
 	useEffect(() => {
 		if (autoResizing) {
 			const firstSource = Array.isArray(source) ? source[0] : source;
+
 			if (typeof firstSource !== 'number' && firstSource?.uri) {
 				const sourceKey = JSON.stringify(source);
+
 				if (sizeCache[sourceKey]) {
 					setSize(sizeCache[sourceKey]);
 				} else {
@@ -56,12 +59,13 @@ export const Image: React.FC<ImageProps> = ({
 							height,
 							ratio: width / height,
 						};
+
 						setSize({ width, height, ratio: width / height });
 					});
 				}
 			}
 		}
-	}, [autoResizing, height, source, width]);
+	}, [autoResizing, source]);
 
 	const finalWidth = useMemo(
 		() =>
@@ -94,13 +98,16 @@ export const Image: React.FC<ImageProps> = ({
 						{
 							width: finalWidth || finalHeight,
 							height: finalHeight || finalWidth,
-							...(fillContainer && { flex: 1 }),
+							...(fillContainer && {
+								flex: 1,
+							}),
 						},
 						style,
 					]}
 					onLoadEnd={() => setIsLoading(false)}
 					{...rest}
 				/>
+
 				{isLoading && (
 					<Grid
 						style={[

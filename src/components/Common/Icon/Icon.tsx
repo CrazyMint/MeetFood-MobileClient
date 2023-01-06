@@ -7,7 +7,7 @@ import { StyleProp, ViewStyle } from 'react-native';
 
 const DEFAULT_COLOR = '#F6671E';
 
-export interface Iconprops extends Omit<UiKittenIconProps, 'name'> {
+export interface IconProps extends Omit<UiKittenIconProps, 'name'> {
 	fill?: string;
 	color?: string;
 	size?: number;
@@ -16,7 +16,7 @@ export interface Iconprops extends Omit<UiKittenIconProps, 'name'> {
 }
 
 export const IconGetter = (name: string) => {
-	const component: React.FC<Iconprops> = ({
+	const component: React.FC<IconProps> = ({
 		fill,
 		color,
 		size,
@@ -27,11 +27,18 @@ export const IconGetter = (name: string) => {
 			<UiKittenIcon
 				name={name}
 				fill={fill ?? color ?? DEFAULT_COLOR}
-				style={[size && { width: size, height: size }, style]}
+				style={[
+					size && {
+						width: size,
+						height: size,
+					},
+					style,
+				]}
 				{...rest}
 			/>
 		);
 	};
+
 	return component;
 };
 

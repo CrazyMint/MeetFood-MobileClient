@@ -1,8 +1,8 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '../../hooks/useNavigation';
-import { BackIcon } from '../Common/Icon';
+import { BackIcon } from '../Common';
 
 export interface AuthLayoutProps {
 	children?: React.ReactNode;
@@ -10,6 +10,7 @@ export interface AuthLayoutProps {
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
 	const { goBack } = useNavigation();
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<View
@@ -20,7 +21,10 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
 			>
 				<BackIcon size={25} color="#0F0E0E" onPress={goBack} />
 			</View>
+
 			<View style={{ flex: 1, paddingHorizontal: 16 }}>{children}</View>
 		</SafeAreaView>
 	);
 };
+
+export default AuthLayout;

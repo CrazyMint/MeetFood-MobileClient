@@ -3,6 +3,7 @@ import {
 	Text as UiKittenText,
 	TextProps as UiKittenTextProps,
 } from '@ui-kitten/components';
+
 import { styles } from './styles';
 
 export interface TextProps extends UiKittenTextProps {
@@ -21,11 +22,14 @@ export const Text: React.FC<TextProps> = ({
 	...rest
 }) => {
 	const realChildren = text ?? children;
+
 	return (
 		<UiKittenText
 			style={[
 				{
-					...(color && { color }),
+					...(color && {
+						color,
+					}),
 				},
 				disabled && styles.disabled,
 				!disabled && !!onPress && styles.pressable,

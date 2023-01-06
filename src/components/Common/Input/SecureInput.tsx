@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
+
 import { EyeIcon, EyeOffIcon } from '../Icon';
 import { Input, InputProps } from './Input';
 
-export interface SecureInputProps extends InputProps {
-	SecureInput?: string | number | null;
-	color?: string;
-	disabled?: boolean;
-}
+export interface SecureInputProps extends InputProps {}
 
 export const SecureInput: React.FC<SecureInputProps> = (props) => {
 	const [passwordVisible, setPasswordVisible] = useState(false);
+
 	return (
 		<Input
 			{...props}
