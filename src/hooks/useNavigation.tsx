@@ -53,6 +53,20 @@ export const useNavigation = () => {
 		navigate(AppRouteName.MoreScreen);
 	}, [navigate]);
 
+	const navigateToSingleVideoFeedScreen = useCallback(() => {
+		navigate(AppRouteName.SingleVideoFeedScreen);
+	}, [navigate]);
+
+	const navigateToSingleVideoViewScreen = useCallback(
+		(videoPostId: string, enableDelete: boolean = false) => {
+			navigate(AppRouteName.SingleVideoViewScreen, {
+				videoPostId,
+				enableDelete,
+			});
+		},
+		[navigate],
+	);
+
 	return {
 		goBack,
 		navigate,
@@ -64,5 +78,7 @@ export const useNavigation = () => {
 		navigateToAccountProfileSetupScreen,
 		navigateToUpdateAccountProfileScreen,
 		navigateToMoreScreen,
+		navigateToSingleVideoFeedScreen,
+		navigateToSingleVideoViewScreen,
 	};
 };

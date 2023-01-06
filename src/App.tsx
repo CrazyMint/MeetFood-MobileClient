@@ -10,6 +10,8 @@ import { default as theme } from './configs/custom-theme.json';
 import { Amplify } from 'aws-amplify';
 import { default as amplifyConfig } from './configs/amplify.json';
 import { UserContextProvider } from './contexts/UserContext';
+import { FeedContextProvider } from './contexts/FeedContext';
+import { ModalContextProvider } from './contexts/ModalContext';
 
 /** @reference https://docs.amplify.aws/lib/client-configuration/configuring-amplify-categories/q/platform/js/#top-level-configuration */
 Amplify.configure(amplifyConfig);
@@ -20,9 +22,13 @@ export const App: React.FC = () => {
 			<SafeAreaProvider>
 				<IconRegistry icons={EvaIconsPack} />
 				<ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-					<UserContextProvider>
-						<AppNavigator />
-					</UserContextProvider>
+					<ModalContextProvider>
+						<UserContextProvider>
+							<FeedContextProvider>
+								<AppNavigator />
+							</FeedContextProvider>
+						</UserContextProvider>
+					</ModalContextProvider>
 				</ApplicationProvider>
 			</SafeAreaProvider>
 		</NavigationContainer>

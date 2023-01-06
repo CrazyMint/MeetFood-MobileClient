@@ -17,6 +17,8 @@ import {
 } from './AppHomeNavigator';
 import UpdateAccountProfile from '../../screens/UpdateAccountProfile';
 import More from '../../screens/More';
+import SingleVideoFeed from '../../screens/SingleVideoFeed';
+import SingleVideoView from '../../screens/SingleVideoView';
 
 export type AppNavigatorParamList = {
 	[AppRouteName.HomeNavigator]: NavigatorScreenParams<AppHomeNavigatorParamList>;
@@ -33,6 +35,11 @@ export type AppNavigatorParamList = {
 	};
 	[AppRouteName.UpdateAccountProfileScreen]: undefined;
 	[AppRouteName.MoreScreen]: undefined;
+	[AppRouteName.SingleVideoFeedScreen]: undefined;
+	[AppRouteName.SingleVideoViewScreen]: {
+		videoPostId: string;
+		enableDelete?: boolean;
+	};
 };
 
 const { Navigator, Screen } = createStackNavigator<AppNavigatorParamList>();
@@ -74,6 +81,14 @@ export const AppNavigator: React.FC = () => {
 				component={UpdateAccountProfile}
 			/>
 			<Screen name={AppRouteName.MoreScreen} component={More} />
+			<Screen
+				name={AppRouteName.SingleVideoFeedScreen}
+				component={SingleVideoFeed}
+			/>
+			<Screen
+				name={AppRouteName.SingleVideoViewScreen}
+				component={SingleVideoView}
+			/>
 		</Navigator>
 	);
 };

@@ -8,6 +8,8 @@ export enum AppRouteName {
 	AccountProfileSetupScreen = 'AccountProfileSetupScreen',
 	UpdateAccountProfileScreen = 'UpdateAccountProfileScreen',
 	MoreScreen = 'MoreScreen',
+	SingleVideoFeedScreen = 'SingleVideoFeedScreen',
+	SingleVideoViewScreen = 'SingleVideoViewScreen',
 }
 
 export enum AppHomeRouteName {
