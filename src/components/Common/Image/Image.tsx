@@ -91,7 +91,13 @@ export const Image: React.FC<ImageProps> = ({
 
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
-			<View>
+			<View
+				style={{
+					...(fillContainer && {
+						flex: 1,
+					}),
+				}}
+			>
 				<RNImage
 					source={source}
 					style={[
