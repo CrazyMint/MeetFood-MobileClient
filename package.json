@@ -12,7 +12,7 @@
 		"clean:ios": "cd ios && (rm -rf ./build || true) && (rm -rf ./Pods || true) && (rm Podfile.lock || true) && cd ..",
 		"clean:modules": "(rm -rf node_modules || true) && (rm -rf yarn.lock || true) && (rm -rf package-lock.json || true)",
 		"start:reset": "npm run start -- --reset-cache",
-		"postinstall": "cd ios && bundle install && bundle exec pod install && cd"
+		"postinstall": "patch-package && cd ios && bundle install && bundle exec pod install && cd"
 	},
 	"dependencies": {
 		"@eva-design/eva": "^2.1.1",
@@ -27,9 +27,13 @@
 		"amazon-cognito-identity-js": "^5.2.12",
 		"aws-amplify": "^5.0.3",
 		"aws-amplify-react-native": "^6.0.8",
+		"patch-package": "^6.5.1",
 		"react": "18.1.0",
 		"react-native": "0.70.4",
+		"react-native-camera": "^4.2.1",
+		"react-native-create-thumbnail": "^1.6.4",
 		"react-native-gesture-handler": "^2.8.0",
+		"react-native-image-crop-picker": "^0.38.0",
 		"react-native-keyboard-aware-scroll-view": "^0.9.5",
 		"react-native-modalize": "^2.1.1",
 		"react-native-safe-area-context": "^4.4.1",

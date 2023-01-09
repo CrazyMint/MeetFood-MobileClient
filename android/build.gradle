@@ -47,5 +47,17 @@ allprojects {
         }
         google()
         maven { url 'https://www.jitpack.io' }
+        maven { url "https://maven.google.com" }
+        
+        exclusiveContent {
+            filter {
+                includeGroup "com.facebook.react"
+            }
+            forRepository {
+                maven {
+                    url "$rootDir/../node_modules/react-native/android"
+                }
+            }
+        }
     }
 }

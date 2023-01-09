@@ -142,6 +142,9 @@ android {
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
+        missingDimensionStrategy 'react-native-camera', 'general'
+        vectorDrawables.useSupportLibrary = true
+
         if (isNewArchitectureEnabled()) {
             // We configure the CMake build only if you decide to opt-in for the New Architecture.
             externalNativeBuild {
@@ -250,6 +253,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation "androidx.appcompat:appcompat:1.0.0"
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
