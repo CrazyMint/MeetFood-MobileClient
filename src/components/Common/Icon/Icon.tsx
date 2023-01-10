@@ -54,3 +54,4 @@ export const NotLikeIcon = IconGetter('heart-outline');
 export const LikeIcon = IconGetter('heart');
 export const PlayIcon = IconGetter('arrow-right');
 export const RefreshIcon = IconGetter('refresh-outline');
+export const CheckIcon = IconGetter('checkmark-outline');

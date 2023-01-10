@@ -3,8 +3,11 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useCallback } from 'react';
 import { AppNavigatorParamList } from '../components/Navigation/AppNavigator';
 import { AppHomeRouteName, AppRouteName } from '../constants/navigation';
+import { useUserContext } from '../contexts/UserContext';
 
 export const useNavigation = () => {
+	const { cognitoUser, user } = useUserContext();
+
 	const { goBack, navigate } =
 		useRNNavigation<StackNavigationProp<AppNavigatorParamList>>();
 
@@ -67,6 +70,20 @@ export const useNavigation = () => {
 		[navigate],
 	);
 
+	const navigateToEditVideoPostScreen = useCallback(
+		(videoPath: string, coverImagePath?: string) => {
+			if (!cognitoUser || !user) {
+				navigateToLoginScreen();
+			} else {
+				navigate(AppRouteName.EditVideoPostScreen, {
+					videoPath,
+					coverImagePath,
+				});
+			}
+		},
+		[cognitoUser, navigate, navigateToLoginScreen, user],
+	);
+
 	return {
 		goBack,
 		navigate,
@@ -80,5 +97,6 @@ export const useNavigation = () => {
 		navigateToMoreScreen,
 		navigateToSingleVideoFeedScreen,
 		navigateToSingleVideoViewScreen,
+		navigateToEditVideoPostScreen,
 	};
 };

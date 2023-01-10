@@ -8,12 +8,13 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 import { PlayIcon, RefreshIcon } from '../Common';
-import Grid from '../Layout/Grid';
+import { Grid } from '../Layout';
 import { styles } from './styles';
 
 export interface InteractiveVideoProps {
 	uri?: string;
 	loaded?: boolean;
+	paused?: boolean;
 	autoPlay?: boolean;
 	fillContainer?: boolean;
 	enableControls?: boolean;
@@ -23,6 +24,7 @@ export interface InteractiveVideoProps {
 export const InteractiveVideo: React.FC<InteractiveVideoProps> = ({
 	uri,
 	loaded = true,
+	paused = false,
 	autoPlay = true,
 	fillContainer = false,
 	enableControls = true,
@@ -40,6 +42,10 @@ export const InteractiveVideo: React.FC<InteractiveVideoProps> = ({
 			setIsPaused(true);
 		}
 	}, [autoPlay]);
+
+	useEffect(() => {
+		setIsPaused(paused);
+	}, [paused]);
 
 	return (
 		<TouchableWithoutFeedback
@@ -63,6 +69,7 @@ export const InteractiveVideo: React.FC<InteractiveVideoProps> = ({
 				{loaded && (
 					<Video
 						ref={videoRef}
+						resizeMode="contain"
 						source={{ uri }}
 						style={styles.video}
 						paused={isPaused}

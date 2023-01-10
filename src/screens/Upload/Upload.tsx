@@ -1,21 +1,22 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Placeholder } from '../../components/Placeholder';
-import { Button } from '@ui-kitten/components';
+
 import { useNavigation } from '../../hooks/useNavigation';
+import SafeAreaView from '../../components/SafeAreaView';
+import CameraView from '../../components/CameraView';
 
 export interface UploadProps {}
 
 export const Upload: React.FC<UploadProps> = () => {
-	const { navigateToFeedScreen } = useNavigation();
+	const { goBack, navigateToEditVideoPostScreen } = useNavigation();
 
 	return (
-		<Placeholder>
-			<Text>This is Upload Screen</Text>
-			<Button onPress={navigateToFeedScreen}>
-				<Text>Go Back</Text>
-			</Button>
-		</Placeholder>
+		<SafeAreaView statusBarStyle="light-content" backgroundColor="black">
+			<CameraView
+				type="video"
+				onCancel={goBack}
+				onDone={navigateToEditVideoPostScreen}
+			/>
+		</SafeAreaView>
 	);
 };
 

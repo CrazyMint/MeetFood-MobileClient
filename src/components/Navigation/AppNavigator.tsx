@@ -19,6 +19,7 @@ import UpdateAccountProfile from '../../screens/UpdateAccountProfile';
 import More from '../../screens/More';
 import SingleVideoFeed from '../../screens/SingleVideoFeed';
 import SingleVideoView from '../../screens/SingleVideoView';
+import EditVideoPost from '../../screens/EditVideoPost';
 
 export type AppNavigatorParamList = {
 	[AppRouteName.HomeNavigator]: NavigatorScreenParams<AppHomeNavigatorParamList>;
@@ -39,6 +40,10 @@ export type AppNavigatorParamList = {
 	[AppRouteName.SingleVideoViewScreen]: {
 		videoPostId: string;
 		enableDelete?: boolean;
+	};
+	[AppRouteName.EditVideoPostScreen]: {
+		videoPath?: string;
+		coverImagePath?: string;
 	};
 };
 
@@ -88,6 +93,10 @@ export const AppNavigator: React.FC = () => {
 			<Screen
 				name={AppRouteName.SingleVideoViewScreen}
 				component={SingleVideoView}
+			/>
+			<Screen
+				name={AppRouteName.EditVideoPostScreen}
+				component={EditVideoPost}
 			/>
 		</Navigator>
 	);

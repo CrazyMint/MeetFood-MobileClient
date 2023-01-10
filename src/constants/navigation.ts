@@ -10,6 +10,7 @@ export enum AppRouteName {
 	MoreScreen = 'MoreScreen',
 	SingleVideoFeedScreen = 'SingleVideoFeedScreen',
 	SingleVideoViewScreen = 'SingleVideoViewScreen',
+	EditVideoPostScreen = 'EditVideoPostScreen',
 }
 
 export enum AppHomeRouteName {
