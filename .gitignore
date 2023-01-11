@@ -65,3 +65,5 @@ buck-out/
 
 # User Config
 /src/configs/amplify.json
+android/gradle.properties
+android/gradle.properties
